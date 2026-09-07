@@ -1,4 +1,4 @@
-print("SENTINAL SECURITY MONITOR")
+print("SENTINEL SECURITY MONITOR")
 print("-----------------------------")
 print("system loaded successfully")
 username = "admin"
@@ -22,6 +22,12 @@ for event in events:
     print("username:", username)
     print("IP:", ip_address)
     print("Failed attempts:", failed_attempts)
+
+    if failed_attempts >= 5:
+       print("Possible brute force attack detected")
+    else:
+       print("No brute force attack detected")
+
 
 
 
