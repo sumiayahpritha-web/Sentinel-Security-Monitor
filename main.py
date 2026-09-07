@@ -24,6 +24,9 @@ for event in events:
     print("Failed attempts:", failed_attempts)
 
     if failed_attempts >= 5:
+       print("username:", username)
+       print("IP:", ip_address)
+       print("Failed attempts:", failed_attempts)
        print("Possible brute force attack detected")
     else:
        print("No brute force attack detected")
