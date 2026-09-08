@@ -22,6 +22,9 @@ def check_event(username, ip_address, failed_attempts):
 with open("events.txt","r") as file:
     events = file.readlines()
     print(events)
+ip_attempts = {}
+
+
 for event in events:
     username, ip_address, failed_attempts = event.strip().split(",")
     failed_attempts = int(failed_attempts)
@@ -29,6 +32,17 @@ for event in events:
     print("IP:", ip_address)
     print("Failed attempts:", failed_attempts)
     check_event(username, ip_address, failed_attempts) 
+    if ip_address in ip_attempts:
+          ip_attempts[ip_address] += failed_attempts
+    else:
+          ip_attempts[ip_address] = failed_attempts
+print("ACTIVITY SUMMARY")
+print("____________________")
+
+for ip_address, total_attempts in ip_attempts.items():
+      print(ip_address, "_", total_attempts,"failed attempts")
+
+
 
        
 
