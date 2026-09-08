@@ -24,12 +24,19 @@ for event in events:
     print("Failed attempts:", failed_attempts)
 
     if failed_attempts >= 5:
+       print("🚨 SECURITY ALERT")
        print("username:", username)
        print("IP:", ip_address)
        print("Failed attempts:", failed_attempts)
        print("Possible brute force attack detected")
+
+       with open("alerts.txt", "a") as alerts_file:
+           alerts_file.write(
+               f"SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
+               )
+       
     else:
-       print("No brute force attack detected")
+        print("No brute force attack detected")
 
 
 
