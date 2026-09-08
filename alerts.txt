@@ -1,2 +1,6 @@
 SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attemps: 5 | Possible brute force attack detected
 SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attemps: 8 | Possible brute force attack detected
+SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
+SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
+SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
+SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected

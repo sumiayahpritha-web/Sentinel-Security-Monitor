@@ -1,17 +1,23 @@
 print("SENTINEL SECURITY MONITOR")
 print("-----------------------------")
 print("system loaded successfully")
-username = "admin"
-ip_address = "192.168.1.20"
-failed_attempts = 7
-print(username)
-print(ip_address)
-print(failed_attempts)
-if failed_attempts >= 5:
-    print("Possible brute force attack detected")
-else:
-    print("No brute force attack detected")
 
+def check_event(username, ip_address, failed_attempts):
+    if failed_attempts >= 5:
+       print("🚨 SECURITY ALERT")
+       print("username:", username)
+       print("IP:", ip_address)
+       print("Failed attempts:", failed_attempts)
+       print("Possible brute force attack detected")
+
+       with open("alerts.txt", "a") as alerts_file:
+                  alerts_file.write(
+                      f"SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
+                      )
+              
+    else:
+               print("No brute force attack detected")
+       
 
 with open("events.txt","r") as file:
     events = file.readlines()
@@ -22,22 +28,9 @@ for event in events:
     print("username:", username)
     print("IP:", ip_address)
     print("Failed attempts:", failed_attempts)
+    check_event(username, ip_address, failed_attempts) 
 
-    if failed_attempts >= 5:
-       print("🚨 SECURITY ALERT")
-       print("username:", username)
-       print("IP:", ip_address)
-       print("Failed attempts:", failed_attempts)
-       print("Possible brute force attack detected")
-
-       with open("alerts.txt", "a") as alerts_file:
-           alerts_file.write(
-               f"SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
-               )
        
-    else:
-        print("No brute force attack detected")
-
 
 
 
