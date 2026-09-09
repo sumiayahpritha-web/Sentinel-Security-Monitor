@@ -51,6 +51,11 @@ print("____________________")
 
 for ip_address, total_attempts in ip_attempts.items():
       print(ip_address, "_", total_attempts,"failed attempts")
+      if total_attempts >= 6:
+            print("REPEATED ATTACK ACTIVITY")
+            print("IP:",ip_address)
+            print("Total Failed Attempts:", total_attempts)
+            
 
 
 
