@@ -4,8 +4,16 @@ print("system loaded successfully")
 from datetime import datetime
 def check_event(username, ip_address, failed_attempts):
     timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+#making a priortity based event listing
+    if failed_attempts >= 8:
+       severity = "CRITICAL"
+    elif failed_attempts >= 5:
+         severity = "HIGH"
+    else:
+         severity = "NOEMAL"
+
     if failed_attempts >= 5:
-       print("🚨 SECURITY ALERT")
+       print("🚨", severity,"SECURITY ALERT")
        print("Timestamp:", timestamp)
        print("username:", username)
        print("IP:", ip_address)
@@ -14,7 +22,7 @@ def check_event(username, ip_address, failed_attempts):
 
        with open("alerts.txt", "a") as alerts_file:
                   alerts_file.write(
-                      f"{timestamp} | SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
+                      f"{timestamp} | {severity} | SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
                       )
               
     else:
