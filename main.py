@@ -1,10 +1,12 @@
 print("SENTINEL SECURITY MONITOR")
 print("-----------------------------")
 print("system loaded successfully")
-
+from datetime import datetime
 def check_event(username, ip_address, failed_attempts):
+    timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
     if failed_attempts >= 5:
        print("🚨 SECURITY ALERT")
+       print("Timestamp:", timestamp)
        print("username:", username)
        print("IP:", ip_address)
        print("Failed attempts:", failed_attempts)
@@ -12,7 +14,7 @@ def check_event(username, ip_address, failed_attempts):
 
        with open("alerts.txt", "a") as alerts_file:
                   alerts_file.write(
-                      f"SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
+                      f"{timestamp} | SECURITY ALERT | Username: {username} | IP Address: {ip_address} | Failed attempts: {failed_attempts} | Possible brute force attack detected\n"
                       )
               
     else:

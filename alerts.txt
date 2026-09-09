@@ -4,3 +4,11 @@ SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5
 SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
 SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
 SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
+SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
+SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
+09-09-2026 13:33:50 | SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
+09-09-2026 13:33:50 | SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
+09-09-2026 13:33:52 | SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
+09-09-2026 13:33:52 | SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
+09-09-2026 13:37:01 | SECURITY ALERT | Username: admin | IP Address: 192.168.1.20 | Failed attempts: 5 | Possible brute force attack detected
+09-09-2026 13:37:01 | SECURITY ALERT | Username: root | IP Address: 192.168.1.50 | Failed attempts: 8 | Possible brute force attack detected
