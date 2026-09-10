@@ -1,7 +1,10 @@
 print("SENTINEL SECURITY MONITOR")
 print("-----------------------------")
 print("system loaded successfully")
+ip_attempts = {}
+
 from datetime import datetime
+import time
 def check_event(username, ip_address, failed_attempts):
     timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 #making a priortity based event listing
@@ -10,7 +13,7 @@ def check_event(username, ip_address, failed_attempts):
     elif failed_attempts >= 5:
          severity = "HIGH"
     else:
-         severity = "NOEMAL"
+         severity = "NORMAL"
 
     if failed_attempts >= 5:
        print("🚨", severity,"SECURITY ALERT")
@@ -26,36 +29,41 @@ def check_event(username, ip_address, failed_attempts):
                       )
               
     else:
-               print("No brute force attack detected")
-       
-
-with open("events.txt","r") as file:
-    events = file.readlines()
-    print(events)
-ip_attempts = {}
-
-
-for event in events:
-    username, ip_address, failed_attempts = event.strip().split(",")
-    failed_attempts = int(failed_attempts)
-    print("username:", username)
-    print("IP:", ip_address)
-    print("Failed attempts:", failed_attempts)
-    check_event(username, ip_address, failed_attempts) 
+        print("No brute force attack detected")
     if ip_address in ip_attempts:
-          ip_attempts[ip_address] += failed_attempts
+        ip_attempts[ip_address] += failed_attempts
     else:
-          ip_attempts[ip_address] = failed_attempts
-print("ACTIVITY SUMMARY")
-print("____________________")
+        ip_attempts[ip_address] = failed_attempts
+last_position = 0
+while True:   
 
-for ip_address, total_attempts in ip_attempts.items():
-      print(ip_address, "_", total_attempts,"failed attempts")
-      if total_attempts >= 6:
+    with open("events.txt","r") as file:
+         file.seek(last_position)
+         new_events = file.readlines()
+         last_position = file.tell()
+          
+    for event in new_events:
+        if not event.strip():
+             continue
+        username, ip_address, failed_attempts = event.strip().split(",")
+        failed_attempts = int(failed_attempts)
+        print("New Events detected")
+        print("username:", username)
+        print("IP:", ip_address)
+        print("Failed attempts:", failed_attempts)
+        check_event(username, ip_address, failed_attempts) 
+    if new_events: 
+       print("ACTIVITY SUMMARY")
+       print("____________________")
+
+       for ip_address, total_attempts in ip_attempts.items():
+           print(ip_address, "_", total_attempts,"failed attempts")
+           if total_attempts >= 6:
             print("REPEATED ATTACK ACTIVITY")
             print("IP:",ip_address)
             print("Total Failed Attempts:", total_attempts)
-            
+    time.sleep(2)  
+        
 
 
 
