@@ -45,8 +45,18 @@ while True:
     for event in new_events:
         if not event.strip():
              continue
-        username, ip_address, failed_attempts = event.strip().split(",")
-        failed_attempts = int(failed_attempts)
+        parts = event.strip().split(",")
+        if len(parts) !=3:
+            print("Invalid event",event.strip())
+            continue
+        username, ip_address, failed_attempts =parts
+        try:
+            failed_attempts = int(failed_attempts)
+        except ValueError:
+            print("invalid failed attempts",failed_attempts)
+            continue
+
+       
         print("New Events detected")
         print("username:", username)
         print("IP:", ip_address)
