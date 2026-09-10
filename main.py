@@ -22,12 +22,12 @@ def check_event(username, ip_address, failed_attempts):
     else:
          severity = "NORMAL"
          total_events += 1
-         if severity == "CRITICAL":
-             critical_alerts += 1
-         elif severity == "HIGH":
-             high_alerts += 1
-         else:
-             normal_events += 1            
+    if severity == "CRITICAL":
+        critical_alerts += 1
+    elif severity == "HIGH":
+        high_alerts += 1
+    else:
+        normal_events += 1            
             
     if failed_attempts >= 5:
        print("🚨", severity,"SECURITY ALERT")
@@ -48,6 +48,13 @@ def check_event(username, ip_address, failed_attempts):
         ip_attempts[ip_address] += failed_attempts
     else:
         ip_attempts[ip_address] = failed_attempts
+def save_statistics():
+    with open("statistics.txt","w")as statistics_file:
+        statistics_file.write(f"Total_Events:  {total_events}\n")
+        statistics_file.write(f"Normal_Events:  {normal_events}\n")
+        statistics_file.write(f"High_Events:  {high_alerts}\n")
+        statistics_file.write(f"Critical_Events: {critical_alerts}\n")
+        
 def show_report():
     print("SECURITY REPORT")
     print("___________________")
@@ -92,11 +99,12 @@ while True:
        for ip_address, total_attempts in ip_attempts.items():
            print(ip_address, "_", total_attempts,"failed attempts")
            if total_attempts >= REPEATED_THRESHOLD:
-            print("REPEATED ATTACK ACTIVITY")
-            print("IP:",ip_address)
-            print("Total Failed Attempts:", total_attempts)
-            print()
-            show_report()
+               print("REPEATED ATTACK ACTIVITY")
+               print("IP:",ip_address)
+               print("Total Failed Attempts:", total_attempts)
+               print()
+       show_report()
+       save_statistics()
     time.sleep(2)  
         
 

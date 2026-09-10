@@ -1,0 +1,4 @@
+Total_Events:  11
+Normal_Events:  11
+High_Events:  13
+Critical_Events: 7
