@@ -5,9 +5,14 @@ ip_attempts = {}
 CRITICAL_THRESHOLD = 8
 HIGH_THRESHOLD = 5
 REPEATED_THRESHOLD = 6
+total_events = 0
+normal_events = 0
+high_alerts = 0
+critical_alerts = 0
 from datetime import datetime
 import time
 def check_event(username, ip_address, failed_attempts):
+    global total_events, normal_events, high_alerts, critical_alerts
     timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 #making a priortity based event listing
     if failed_attempts >= CRITICAL_THRESHOLD:
@@ -16,7 +21,14 @@ def check_event(username, ip_address, failed_attempts):
          severity = "HIGH"
     else:
          severity = "NORMAL"
-
+         total_events += 1
+         if severity == "CRITICAL":
+             critical_alerts += 1
+         elif severity == "HIGH":
+             high_alerts += 1
+         else:
+             normal_events += 1            
+            
     if failed_attempts >= 5:
        print("🚨", severity,"SECURITY ALERT")
        print("Timestamp:", timestamp)
@@ -36,6 +48,15 @@ def check_event(username, ip_address, failed_attempts):
         ip_attempts[ip_address] += failed_attempts
     else:
         ip_attempts[ip_address] = failed_attempts
+def show_report():
+    print("SECURITY REPORT")
+    print("___________________")
+    print()
+    print("TOTAL EVENTS: ",total_events)
+    print("NORMAL EVENTS: ",normal_events)
+    print("HIGH ALERTS: ",high_alerts)
+    print("CRITICAL ALERTS: ",critical_alerts)
+    print("___________________")
 last_position = 0
 while True:   
 
@@ -74,6 +95,8 @@ while True:
             print("REPEATED ATTACK ACTIVITY")
             print("IP:",ip_address)
             print("Total Failed Attempts:", total_attempts)
+            print()
+            show_report()
     time.sleep(2)  
         
 
