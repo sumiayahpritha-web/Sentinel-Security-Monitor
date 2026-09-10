@@ -1,3 +1,5 @@
+import os
+print("PROJECT FOLDER:", os.getcwd())
 print("SENTINEL SECURITY MONITOR")
 print("-----------------------------")
 print("system loaded successfully")
@@ -21,7 +23,7 @@ def check_event(username, ip_address, failed_attempts):
          severity = "HIGH"
     else:
          severity = "NORMAL"
-         total_events += 1
+    total_events += 1
     if severity == "CRITICAL":
         critical_alerts += 1
     elif severity == "HIGH":
