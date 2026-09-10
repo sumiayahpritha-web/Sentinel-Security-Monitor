@@ -2,15 +2,17 @@ print("SENTINEL SECURITY MONITOR")
 print("-----------------------------")
 print("system loaded successfully")
 ip_attempts = {}
-
+CRITICAL_THRESHOLD = 8
+HIGH_THRESHOLD = 5
+REPEATED_THRESHOLD = 6
 from datetime import datetime
 import time
 def check_event(username, ip_address, failed_attempts):
     timestamp = datetime.now().strftime("%d-%m-%Y %H:%M:%S")
 #making a priortity based event listing
-    if failed_attempts >= 8:
+    if failed_attempts >= CRITICAL_THRESHOLD:
        severity = "CRITICAL"
-    elif failed_attempts >= 5:
+    elif failed_attempts >= HIGH_THRESHOLD:
          severity = "HIGH"
     else:
          severity = "NORMAL"
@@ -68,7 +70,7 @@ while True:
 
        for ip_address, total_attempts in ip_attempts.items():
            print(ip_address, "_", total_attempts,"failed attempts")
-           if total_attempts >= 6:
+           if total_attempts >= REPEATED_THRESHOLD:
             print("REPEATED ATTACK ACTIVITY")
             print("IP:",ip_address)
             print("Total Failed Attempts:", total_attempts)
